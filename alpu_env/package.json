@@ -1,0 +1,26 @@
+{
+  "name": "alpu_env",
+  "type": "commonjs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "tokens": "npx ts-node --project tsconfig.json src/scripts/getTokens.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ethersproject/bignumber": "^5.7.0",
+    "@types/ws": "^8.5.4",
+    "bigjs": "^0.0.3",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.0.23",
+    "ts-node": "^10.9.1",
+    "yalc": "^1.0.0-pre.53"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.1.6",
+    "@types/node": "^20.2.4"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "alpu_markets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "set NODE_OPTIONS=--max-old-space-size=2048 && npx ts-node --project tsconfig.json src/index.ts",
+    "deploy": "npx ts-node --project tsconfig.json src/scripts/deploy.ts",
+    "compile": "npx ts-node --project tsconfig.json src/scripts/compile.ts && copyfiles --flat contracts/abi/*.json src/abi",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/async-lock": "^1.4.0",
+    "@types/node": "^20.3.1",
+    "@types/ws": "^8.5.4",
+    "alpu_env": "file:.yalc/alpu_env",
+    "async-lock": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.0.23",
+    "fs-extra": "^11.1.1",
+    "js-sha3": "^0.8.0",
+    "path": "^0.12.7",
+    "solc": "0.8.19",
+    "ts-node": "^10.9.1"
+  }
+}

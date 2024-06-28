@@ -1,0 +1,13 @@
+# select docker desktop context
+docker use context desktop-linux
+
+#start the image
+docker compose up
+
+#stop the image
+docker stop --time=300 $(docker ps -aq)
+
+# run sequencer relay
+sudo docker run --rm -it -p 0.0.0.0:9642:9642 --entrypoint relay offchainlabs/nitro-node:v2.0.14-2baa834 --node.feed.output.addr=0.0.0.0 --node.feed.input.url=wss://arb1.arbitrum.io/feed --l2.chain-id=42161
+
+docker run --rm -it  -v dev/sdb1/data:/home/user/.arbitrum -p 0.0.0.0:8547:8547 -p 0.0.0.0:8548:8548 offchainlabs/nitro-node:v2.0.14-2baa834 l1.url {--YOUR-L1-URL--} --l2.chain-id=42161 --http.api=net,web3,eth,debug --http.corsdomain=* --http.addr=0.0.0.0 --http.vhosts=* --init.url="https://snapshot.arbitrum.io/mainnet/nitro.tar" 

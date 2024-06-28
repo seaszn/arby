@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  relay:
+    image: offchainlabs/nitro-node:v2.0.14-2baa834
+    entrypoint: relay
+    command:
+      - --node.feed.input.url=wss://arb1.arbitrum.io/feed
+      - --node.feed.output.addr=0.0.0.0
+      - --l2.chain-id=42161
+    ports:
+      - 9642:9642
+    networks:
+      - relay
+  markets:
+    build: ./alpu_markets
+    depends_on:
+      - relay
+    environment:
+      - HOST=relay
+    ports:
+      - 8080:8080
+    # volumes:
+    #   - ~myvolume:/markets
+    networks:
+      - relay
+      - markets
+    healthcheck:
+      test: ["CMD", "curl", "localhost:8080"]
+  arbitrage:
+    build: ./alpu_arbitrage
+    depends_on:
+      markets:
+        condition: service_healthy
+    environment:
+      - HOST=markets
+    # volumes:
+    #   - ~myvolume:/markets
+    networks:
+      - markets
+  # arbitrage:
+  #   build: ./alpu_arbitrage
+  #   depends_on:
+  #     - markets
+  #   volumes:
+  #     - ~myvolume:/arbitrage
+networks:
+  relay:
+    name: alpu_relay_network
+  markets:
+    name: alpu_markets_network
+volumes:
+  myvolume:
+    driver: local
+    driver_opts:
+      type: ext4
+      device: ./data
+      o: bind

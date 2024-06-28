@@ -1,0 +1,27 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+*.tsbuildinfo
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+*.vs
+
+# Yalc
+/.yalc
+yalc.lock
+
+# Folders
+node_modules/
+data/
+.Trash-1000/
+build/
+System Volume Information/
+.vscode/settings.json

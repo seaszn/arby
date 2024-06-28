@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  relay:
+    image: offchainlabs/nitro-node:v2.0.14-2baa834
+    entrypoint: relay
+    command:
+      - --node.feed.input.url=wss://arb1.arbitrum.io/feed
+      - --node.feed.output.addr=0.0.0.0
+      - --l2.chain-id=42161
+    ports:
+      - 9642:9642 #FEED
+    depends_on:
+      - node
+  node:
+    user: 0:0
+    image: offchainlabs/nitro-node:v2.0.14-2baa834
+    volumes:
+      - ./data/arbitrum:/root/.arbitrum
+    ports:
+      - 8547:8547 #RPC
+      - 8548:8548 #WEBSOCKET
+    command:
+      - --l1.url=https://eth-mainnet.g.alchemy.com/v2/FC97tG6qxP16n5FwRJ7G0HTvHdYW8cmw
+      - --l2.chain-id=42161
+      
+      - --node.rpc.evm-timeout=0
+      - --node.rpc.gas-cap=0
+      
+      - --http.api=net,web3,eth,arb,debug
+      - --http.corsdomain=* 
+      - --http.addr=0.0.0.0
+
+      - --ws.port=8548
+      - --ws.addr=0.0.0.0
+      - --ws.origins=*
+      
+      - --init.url=file:/root/.arbitrum/nitro.tar
+      - --node.feed.input.url=wss://arb1.arbitrum.io/feed
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:8547"]
+      interval: 300s
+      timeout: 10s
+      retries: 500

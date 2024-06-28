@@ -1,0 +1,9 @@
+[submodule "alpu_env"]
+	path = alpu_env
+	url = https://github.com/seaszn/alpu_env.git
+[submodule "alpu_markets"]
+	path = alpu_markets
+	url = https://github.com/seaszn/alpu_markets.git
+[submodule "alpu_arbitrage"]
+	path = alpu_arbitrage
+	url = https://github.com/seaszn/alpu_arbitrage.git

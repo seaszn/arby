@@ -1,0 +1,1 @@
+export const ERC20 = require('./ERC20.json')
